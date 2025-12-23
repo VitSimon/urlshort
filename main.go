@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/rand"
 	"database/sql"
+	"encoding/hex"
 	"fmt"
 	"log"
 	"net/http"
@@ -38,6 +40,12 @@ func initDB() error {
 	return err
 }
 
+func getCode(n int, uri string) string {
+	b := make([]byte, n)
+	rand.Read(b)
+	return hex.EncodeToString(b)
+}
+
 // Handler : create short URL link
 func createHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -51,7 +59,7 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	code := fmt.Sprintf("%x", time.Now().UnixNano())[:6] // simple code
+	code := getCode(6, original)
 	_, err := db.Exec("INSERT INTO uris(code, original) VALUES(?, ?)", code, original)
 	if err != nil {
 		log.Printf("DB insert error: %v", err)
@@ -59,7 +67,7 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write([]byte(fmt.Sprintf("Short URL code: %s\n", code)))
+	w.Write([]byte(fmt.Sprintf("%s", code)))
 }
 
 // Handler : Redirect
