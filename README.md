@@ -28,7 +28,8 @@ Linux systems:
 
 ## Usage
 
-Webserver is accessible from port **80** via your browser with use of your IP for external network (inside Podman network access via container alias and port 8080)
+Webserver is accessible from port **80** via your browser with use of your IP for external network (inside Podman network access via container alias and port 8080).  
+Database with URIs and codes is stored in: **./urlshortdata/shortener.db** .
 
 ### Create short link for URI
 
