@@ -22,9 +22,9 @@ Base : **scratch**
 
 Linux systems:
 
-> podman pull ghcr.io/vitsimon/urlshort
-> mkdir ./urlshortdata
-> podman run -p 80:8080 -v ./urlshortdata:/data ghcr.io/vitsimon/urlshort
+> podman pull ghcr.io/vitsimon/urlshort  
+> mkdir ./urlshortdata  
+> podman run -p 80:8080 -v ./urlshortdata:/data ghcr.io/vitsimon/urlshort  
 
 ## Usage
 
@@ -32,23 +32,23 @@ Webserver is accessible from port 80 via your browser with use of your IP for ex
 
 ### Create short link for URI
 
-GET
-http://your-ip:8080/c?u=https://www.seznam.cz
-> code
-> HTTP 200
+GET  
+http://your-ip:8080/c?u=https://www.seznam.cz  
+> code  
+> HTTP 200  
 
 ### Use short link
 
 You will use code from **Create short link** step.
 e.g.:
 
-1. If code exists:
-GET
-http://your-ip:8080/5bd0e723ada6
+1. If code exists:  
+GET  
+http://your-ip:8080/5bd0e723ada6  
 > redirection to given URI
 
-2. If code not exists:
-GET
-http://your-ip:8080/5bd0e723ada6notexists
-> Not found
+1. If code not exists:  
+GET  
+http://your-ip:8080/5bd0e723ada6notexists  
+> Not found  
 > HTTP 404
