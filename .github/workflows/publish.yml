@@ -36,6 +36,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[pub]') }}
         run: |
           go build
+          echo "exists=true" >> $GITHUB_OUTPUT
 
       - name: Create tag
         id: newtag
