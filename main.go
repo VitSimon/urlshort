@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	dbPath  = "data/shortener.db"
+	dbPath  = "shortener.db"
 	addr    = ":8080"
 	timeout = 5 * time.Second
 )
