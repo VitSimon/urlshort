@@ -1,6 +1,6 @@
 # urlshort
 
-A simple HTTP server application for shortening URI addresses. It provides shortened codes for given URI addresses. Each URI address can be defined multiple times and will receive a new code each time. Data is stored in an SQLite database.
+A simple HTTP server application for shortening URI addresses. It provides shortened codes for given URI addresses. Each URI address can be defined multiple times and will receive a new code each time. Data is stored in an SQLite database. The server does not record any traffic or code usage.
 
 ## Install
 
@@ -11,7 +11,7 @@ A simple HTTP server application for shortening URI addresses. It provides short
 
 This call will provide static build of source code (no external lib or binary dependencies).
 
-> CGO_ENABLED=0 \
+> CGO_ENABLED=0 \\  
 > go build -trimpath -ldflags="-s -w" -o main
 
 The same approach is used for OCI image preparation by CI/CD pipeline.
@@ -28,7 +28,7 @@ Linux systems:
 
 ## Usage
 
-Webserver is accessible from port 80 via your browser with use of your IP for external network (inside Podman network access via container alias and port 8080)
+Webserver is accessible from port **80** via your browser with use of your IP for external network (inside Podman network access via container alias and port 8080)
 
 ### Create short link for URI
 
@@ -47,7 +47,7 @@ GET
 http://your-ip:8080/5bd0e723ada6  
 > redirection to given URI
 
-1. If code not exists:  
+2. If code not exists:  
 GET  
 http://your-ip:8080/5bd0e723ada6notexists  
 > Not found  
