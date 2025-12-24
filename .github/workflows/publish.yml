@@ -35,7 +35,13 @@ jobs:
         id: pub
         if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[pub]') }}
         run: |
-          go build
+          CGO_ENABLED=0 \
+          go build -trimpath -ldflags="-s -w" -o main
+          if ldd main 2>&1 | grep -vq "not a dynamic executable"; then
+            echo "ERROR: binary is dynamically linked"
+            ldd main || true
+            exit 1
+          fi
           echo "exists=true" >> $GITHUB_OUTPUT
 
       - name: Create tag
